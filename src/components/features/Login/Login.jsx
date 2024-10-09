@@ -2,7 +2,12 @@ import React from "react";
 
 const Login = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-400 to-purple-600">
+    <div className="min-h-screen flex items-center justify-center bg-[url('/images/loginbg.png')]">
+        {/* <img
+          src="/images/star.png"
+          alt=""
+          className="absolute left-[31.3px] top-[-103.29px]"
+        /> */}
       <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-lg mx-8">
         {/* Title Section */}
         <h2 className="text-center text-xl font-bold text-black mb-6">

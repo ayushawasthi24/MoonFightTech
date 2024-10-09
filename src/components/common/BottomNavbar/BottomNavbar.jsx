@@ -161,6 +161,8 @@ const BottomNavbar = () => {
     },
   ];
 
+  if (window.location.pathname === "/") return null;
+
   return (
     <div
       className={`${styles.container} fixed px-1 bottom-5 w-full flex justify-evenly py-4`}

@@ -12,7 +12,7 @@ const lightTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: 'Nohemi, sans-serif',
     h1: {
       fontWeight: 700,
     },
@@ -31,7 +31,7 @@ const darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: 'Nohemi, sans-serif',
     h1: {
       fontWeight: 700,
     },

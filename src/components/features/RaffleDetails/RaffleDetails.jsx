@@ -5,8 +5,10 @@ import BottomBar from "../../common/BottomBar/BottomBar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
 
 const RaffleDetails = () => {
+  const navigate = useNavigate();
   const buttons = [
     {
       text: "Preview your Clan",
@@ -72,14 +74,48 @@ const RaffleDetails = () => {
           <p>Credits</p>
         </div>
       </div>
-      <TokenList />
-      <TokenList />
-      <TokenList />
-      <TokenList />
-      <TokenList />
-      <TokenList />
-      <TokenList />
-      <TokenList />
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
+      <div
+        onClick={() =>
+          navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")
+        }
+      >
+        <TokenList />
+      </div>
       <BottomBar buttons={buttons} />
     </div>
   );

@@ -1,8 +1,11 @@
 import React from "react";
 import Header from "../../common/Header/Header";
 import RafflesCard from "../../common/RafflesCard/RafflesCard";
+import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -10,12 +13,23 @@ const Home = () => {
         <div className="text-white text-[14px] ml-[11px] m-2 font-[600]">
           Upcoming Raffles
         </div>
-        <RafflesCard />
-        <RafflesCard />
-        <RafflesCard />
-        <RafflesCard />
-        <RafflesCard />
+        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
+          <RafflesCard />
+        </div>
+        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
+          <RafflesCard />
+        </div>
+        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
+          <RafflesCard />
+        </div>
+        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
+          <RafflesCard />
+        </div>
+        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
+          <RafflesCard />
+        </div>
       </div>
+      <BottomNavbar />
     </>
   );
 };

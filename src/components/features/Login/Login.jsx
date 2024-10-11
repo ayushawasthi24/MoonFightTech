@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[url('/images/loginbg.png')] bg-cover">
+    <div className="h-screen flex items-center justify-center bg-[url('/images/loginbg.png')] bg-cover overflow-hidden">
       <img
         src="/images/star.png"
         alt=""
@@ -37,7 +39,10 @@ const Login = () => {
         </div>
 
         {/* Wallet Connection Buttons */}
-        <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-full flex items-center justify-center mb-3">
+        <button
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-full flex items-center justify-center mb-3"
+          onClick={() => navigate("/home")}
+        >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"
             alt="Metamask"

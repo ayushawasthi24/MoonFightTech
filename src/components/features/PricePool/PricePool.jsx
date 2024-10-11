@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {
   Avatar,
-  Badge,
-  Button,
-  Switch,
-  FormControlLabel,
-  AppBar,
   Tabs,
   Tab,
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomToggle from "../../common/CustomToggle/CustomToggle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BottomBar from "../../common/BottomBar/BottomBar";
@@ -40,7 +38,7 @@ const PricePool = () => {
   const { slug } = useParams();
   const search = useLocation().search;
   const type = new URLSearchParams(search).get("type");
-  
+
   let val = 0;
   switch (type) {
     case "winning":
@@ -86,8 +84,8 @@ const PricePool = () => {
   };
   const handleBack = () => {
     console.log("Back button clicked");
-    navigate('/raffle-details');
-  }
+    navigate("/game/sol-maxis-vs-eth-maxis");
+  };
   const backButton = [
     {
       text: "Back",
@@ -199,7 +197,7 @@ const PricePool = () => {
               <>
                 <div
                   key={index}
-                  className="flex items-center justify-start gap-4 transition-all duration-300 p-4 text-[12px]"
+                  className="flex items-center justify-start gap-4 transition-all duration-300 p-2 text-[12px]"
                 >
                   <div className="flex items-center">
                     <Avatar src={team.imageUrl} alt={team.name} />
@@ -214,8 +212,113 @@ const PricePool = () => {
         </div>
       )}
       {type === "points-calculation" && (
-        <div className="m-4 rounded-[12px]">
-          <h1>Points Calculation</h1>
+        <div className="text-white p-3 rounded-[12px] border-[1px] border-[#424242] m-4">
+          {/* Price Section */}
+          <Accordion
+            sx={{
+              background: "#1E1E1E",
+              color: "white",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-white" />}
+              aria-controls="price-content"
+              id="price-header"
+              className="text-white"
+            >
+              <span className="font-medium">Price</span>
+            </AccordionSummary>
+            <AccordionDetails sx={{ background: "#1E1E1E", color: "white" }}>
+              <ul className="space-y-2">
+                <li className="flex justify-between bg-[#35353580] rounded-[6px] p-1 px-2">
+                  <span>Price Increase</span>
+                  <span className="text-green-400">+1 point</span>
+                </li>
+                <li className="flex justify-between bg-[#35353580] rounded-[6px] p-1 px-2">
+                  <span>5% Price Jump</span>
+                  <span className="text-green-400">+5 points</span>
+                </li>
+                <li className="flex justify-between bg-[#35353580] rounded-[6px] p-1 px-2">
+                  <span>10% Price Jump</span>
+                  <span className="text-green-400">+15 points</span>
+                </li>
+                <li className="flex justify-between bg-[#35353580] rounded-[6px] p-1 px-2">
+                  <span>Price Decrease</span>
+                  <span className="text-red-400">-1 point</span>
+                </li>
+                <li className="flex justify-between bg-[#35353580] rounded-[6px] p-1 px-2">
+                  <span>5% Price Decrease</span>
+                  <span className="text-red-400">-5 points</span>
+                </li>
+              </ul>
+            </AccordionDetails>
+          </Accordion>
+
+          <div className="border-t border-[1px] border-[#424242]" />
+
+          {/* Makers Section */}
+          <Accordion sx={{ background: "#1E1E1E", color: "white" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-white" />}
+              aria-controls="makers-content"
+              id="makers-header"
+            >
+              <span className="font-medium">Makers</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
+                Details about Makers...
+              </p>
+            </AccordionDetails>
+          </Accordion>
+
+          <div className="border-t border-[1px] border-[#424242]" />
+
+          {/* Transactions Section */}
+          <Accordion sx={{ background: "#1E1E1E", color: "white" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-white" />}
+              aria-controls="transactions-content"
+              id="transactions-header"
+            >
+              <span className="font-medium">Transactions</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Transactions...</p>
+            </AccordionDetails>
+          </Accordion>
+
+          <div className="border-t border-[1px] border-[#424242]" />
+
+          {/* Volume Section */}
+          <Accordion sx={{ background: "#1E1E1E", color: "white" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-white" />}
+              aria-controls="volume-content"
+              id="volume-header"
+            >
+              <span className="font-medium">Volume</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Volume...</p>
+            </AccordionDetails>
+          </Accordion>
+
+          <div className="border-t border-[1px] border-[#424242]" />
+
+          {/* Liquidity Section */}
+          <Accordion sx={{ background: "#1E1E1E", color: "white" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-white" />}
+              aria-controls="liquidity-content"
+              id="liquidity-header"
+            >
+              <span className="font-medium">Liquidity</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Liquidity...</p>
+            </AccordionDetails>
+          </Accordion>
         </div>
       )}
       <BottomBar buttons={backButton} />

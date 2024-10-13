@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomToggle from "../../common/CustomToggle/CustomToggle";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import BackHeader from "../../common/BackHeader/BackHeader";
 import BottomBar from "../../common/BottomBar/BottomBar";
 
 const winnings = [
@@ -96,22 +96,11 @@ const PricePool = () => {
   ];
   return (
     <div className="bg-[#1E1E1E] min-h-screen text-white">
-      <div className="flex items-center justify-between p-4">
-        <div className="flex gap-2 items-center justify-center">
-          <ArrowBackIcon className="text-white" onClick={handleBack} />
-          <img
-            src="/images/sol.png"
-            alt="Solana logo"
-            className="rounded-full w-[20px] h-[20px]"
-          />
-          <h2 className="text-[12px] font-bold">Sol Maxis vs Eth Maxis</h2>
-          <img
-            src="/images/eth.png"
-            alt="Ethereum logo"
-            className="w-[20px] h-[20px] rounded-full"
-          />
-        </div>
-      </div>
+      <BackHeader
+        title="Sol Maxis vs Eth Maxis"
+        img1="/images/sol.png"
+        img2="/images/eth.png"
+      />
       {/* Tabs */}
       <Tabs
         value={tabValue}
@@ -284,7 +273,9 @@ const PricePool = () => {
               <span className="font-medium">Transactions</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Transactions...</p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
+                Details about Transactions...
+              </p>
             </AccordionDetails>
           </Accordion>
 
@@ -300,7 +291,9 @@ const PricePool = () => {
               <span className="font-medium">Volume</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Volume...</p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
+                Details about Volume...
+              </p>
             </AccordionDetails>
           </Accordion>
 
@@ -316,7 +309,9 @@ const PricePool = () => {
               <span className="font-medium">Liquidity</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Liquidity...</p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
+                Details about Liquidity...
+              </p>
             </AccordionDetails>
           </Accordion>
         </div>

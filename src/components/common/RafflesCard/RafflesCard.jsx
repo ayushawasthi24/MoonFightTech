@@ -4,8 +4,8 @@ export default function RafflesCard() {
   return (
     <div className="w-full bg-[#353535] rounded-[12px] overflow-hidden shadow-lg h-[126px] my-[12px]">
       <div className="flex justify-between h-[19px] text-white text-[10px] bg-[#535353] text-xs">
-        <span className="mt-[4px] ml-[10px]">Start : 21 Aug 12:00 PM GMT</span>
-        <span className="mt-[4px] mr-[10px]">End : 21 Aug 12:30 PM GMT</span>
+        <span className="my-auto ml-[10px]">Start : 21 Aug 12:00 PM GMT</span>
+        <span className="my-auto mr-[10px]">End : 21 Aug 12:30 PM GMT</span>
       </div>
       <div className="px-4 py-4 flex items-center justify-between text-[12px]">
         <div className="flex items-center space-x-2">
@@ -35,7 +35,7 @@ export default function RafflesCard() {
       <hr className="border-t border-[#535353] border-[0.5px]" />
       <div className="px-4 py-[6px] flex justify-between items-center">
         <div className="bg-[#FFF7F70D] rounded-full px-4 py-2 text-[10px] text-white h-[27px] flex flex-row items-center justify-center">
-          <span>Entry Fee :</span>
+          <span className="">Entry Fee :</span>
           <img
             src="https://s3-alpha-sig.figma.com/img/2654/d0ea/7067f6da4d09a20d5d807a46ea193b8e?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UhFJsAcEfgHYBjlUBwEnM5V2DsjYfyWLTwGLq0-rAQaf-MWKlhdz6k~Ffi1~WeYIeturxT2X6iXKyGPW4tYNLfcYzjpWHmpBXw154HaKnJ8CRARJFm~mKy7EHw-Toi4wcyYWL5aeO-gz1KjoTKgVjPxJqwsfeSlTLuMc0roHyX45rDHx2RFR9Y~N0wyYvPDBL7vqzmNfj9FT0YEA~txcFpSlWHHEvlgioAFjmoH6B2sVhkLMlcjcyXp78PiOBcqz6W7hbYWWwTITFy~aSc~4illXRLcRZZewgbAK6Dco4adkgU6nXHzT~x3Qmb424vWMEyhl~Xmzn85KiaEwN4j~NQ__"
             alt=""

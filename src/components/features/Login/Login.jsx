@@ -10,11 +10,13 @@ const Login = () => {
         alt=""
         className="absolute left-[-100.3px] top-[-100.29px] rotate-[48.77deg] w-[300px] h-[300px]"
       />
-      <img
-        src="/images/star.png"
-        alt=""
-        className="absolute left-[34.3px] bottom-[-130px] rotate-[12deg] w-[350px] h-[350px]"
-      />
+      <div className="absolute left-[34.3px] bottom-0 h-[220px] overflow-hidden">
+        <img
+          src="/images/star.png"
+          alt=""
+          className="relative rotate-[12deg] w-[350px] h-[350px]"
+        />
+      </div>
       <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-lg mx-8">
         {/* Title Section */}
         <h2 className="text-center text-xl font-bold text-black mb-6">

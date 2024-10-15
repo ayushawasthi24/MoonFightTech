@@ -1,76 +1,75 @@
 .prize-pool-container {
-    background-image: url('images/Pattern Bot (1).png');  ;
-    background-color: #2b2b2b;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-    height: 115px;
-    padding: 13px;
-    border-radius: 12px; 
-    width: 100%;
-    font-family: Arial, sans-serif;
-  }
-  
-  .prize-info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: -9px;
-    gap: 125px;
-    width: 100%;
-    font-size: 15px;
-  }
-  
-  .prize-value h1 {
-    margin: 0;
-    font-size: 15px;
-  }
-  
-  .progress-bar {
-    background-color: #444;
-    border-radius: 5px;
-    margin: 5px 0;
-    height: 5px;
-    width: 100%;
-  }
-  
-  .progress {
-    background-color: #b18aff;
-    height: 100%;
-    border-radius: 5px;
-  }
-  
-  .spots-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 12px;
-  }
+  background-image: url("/images/Pattern-bot.png");
+  background-color: #2b2b2b;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  /* background-color: #353535; */
+  /* height: 115px; */
+  padding: 13px;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+}
 
-  
-  .prize-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .win-button, .point-button, .graph-button {
-    background-color: #2b2b2b;
-    display: flex;
-    align-items: center;
-    width: 200px;
-    Height: 10px;
-    Top: 88px;
-    gap: 2px; 
-    font-size: 10px;
-    margin-left: 20px;
-  }
+.prize-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 15px;
+}
 
-  .win-icon, .point-icon, .graph-icon {
-    margin-right: 15px; 
-    margin-left: -10px;
-  }
+.prize-value h1 {
+  margin: 0;
+  font-size: 15px;
+}
 
-  
-  .action-button:hover {
-    background-color: #0c0c0c;
-  }
-    
+.progress-bar {
+  background-color: #444;
+  border-radius: 5px;
+  margin: 15px 0;
+  height: 5px;
+  width: 100%;
+}
+
+.progress {
+  background-color: #6b61ff;
+
+  height: 100%;
+  border-radius: 5px;
+}
+
+.spots-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+.prize-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.win-button,
+.point-button,
+.graph-button {
+  /* background-color: #2b2b2b; */
+  display: flex;
+  align-items: center;
+  /* width: 200px; */
+  height: 10px;
+  /* top: 88px; */
+  /* gap: 2px; */
+  font-size: 10px;
+  margin-left: 20px;
+}
+
+.win-icon,
+.point-icon,
+.graph-icon {
+  margin-right: 10px;
+}
+
+.action-button:hover {
+  background-color: #0c0c0c;
+}

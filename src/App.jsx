@@ -2,7 +2,9 @@ import React from "react";
 import Login from "./components/features/Login/Login";
 import Home from "./components/features/Home/Home";
 import GlobalStyle from "./styles/globalStyles";
-import BottomNavbar from "./components/common/BottomNavbar/BottomNavbar";
+import RaffleDetails from "./components/features/RaffleDetails/RaffleDetails";
+import PricePool from "./components/features/PricePool/PricePool";
+import TokenDetails from "./components/features/TokenDetails/TokenDetails";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -12,8 +14,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/game/:slug" element={<RaffleDetails />} />
+        <Route path="/price-pool/:slug" element={<PricePool />} />
+        <Route path="/token-details/:slug" element={<TokenDetails />} />
       </Routes>
-      <BottomNavbar />
     </Router>
   );
 };

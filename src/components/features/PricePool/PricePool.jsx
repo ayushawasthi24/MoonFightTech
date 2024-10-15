@@ -96,11 +96,7 @@ const PricePool = () => {
   ];
   return (
     <div className="bg-[#1E1E1E] min-h-screen text-white">
-      <BackHeader
-        title="Sol Maxis vs Eth Maxis"
-        img1="/images/sol.png"
-        img2="/images/eth.png"
-      />
+      <BackHeader title="Sol Maxis vs Eth Maxis" img1="/images/sol.png" img2="/images/eth.png" />
       {/* Tabs */}
       <Tabs
         value={tabValue}
@@ -112,7 +108,7 @@ const PricePool = () => {
             textTransform: "none",
             fontWeight: "400",
           },
-          "& .Mui-selected": { color: "#6B61FF" },
+          "& .Mui-selected": { color: "#6B61FF !important" },
           "& .MuiTabs-indicator": { backgroundColor: "#6B61FF" },
         }}
       >
@@ -137,10 +133,7 @@ const PricePool = () => {
           {/* Winnings Table */}
           <List sx={{ mt: 2, flex: 1, overflow: "auto" }}>
             {winnings.map((item, index) => (
-              <ListItem
-                key={index}
-                sx={{ borderBottom: "1px solid #333", py: 1.5 }}
-              >
+              <ListItem key={index} sx={{ borderBottom: "1px solid #333", py: 1.5 }}>
                 <ListItemText primary={item.rank} sx={{ color: "#888" }} />
                 <div
                   style={{
@@ -164,10 +157,7 @@ const PricePool = () => {
                       style={{ width: 20, height: 20, marginRight: 8 }}
                     />
 
-                    <ListItemText
-                      primary={`${item.amount}`}
-                      sx={{ color: "white" }}
-                    />
+                    <ListItemText primary={`${item.amount}`} sx={{ color: "white" }} />
                   </div>
                 </div>
               </ListItem>
@@ -255,9 +245,7 @@ const PricePool = () => {
               <span className="font-medium">Makers</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
-                Details about Makers...
-              </p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Makers...</p>
             </AccordionDetails>
           </Accordion>
 
@@ -273,9 +261,7 @@ const PricePool = () => {
               <span className="font-medium">Transactions</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
-                Details about Transactions...
-              </p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Transactions...</p>
             </AccordionDetails>
           </Accordion>
 
@@ -291,9 +277,7 @@ const PricePool = () => {
               <span className="font-medium">Volume</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
-                Details about Volume...
-              </p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Volume...</p>
             </AccordionDetails>
           </Accordion>
 
@@ -309,9 +293,7 @@ const PricePool = () => {
               <span className="font-medium">Liquidity</span>
             </AccordionSummary>
             <AccordionDetails>
-              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">
-                Details about Liquidity...
-              </p>
+              <p className="bg-[#35353580] rounded-[6px] p-1 px-2">Details about Liquidity...</p>
             </AccordionDetails>
           </Accordion>
         </div>

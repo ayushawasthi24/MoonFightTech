@@ -3,16 +3,16 @@ import Header from "../../common/Header/Header";
 import RafflesCard from "../../common/RafflesCard/RafflesCard";
 import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 import { useNavigate } from "react-router-dom";
+import HowToUse from "../../common/HowToUse/HowToUse";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <>
       <Header />
+      <HowToUse />
       <div className="p-2 bg-[#1E1E1E] h-screen w-screen">
-        <div className="text-white text-[14px] ml-[11px] m-2 font-[600]">
-          Upcoming Raffles
-        </div>
+        <div className="text-white text-[14px] ml-[11px] m-2 font-[600]">Upcoming Raffles</div>
         <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
           <RafflesCard />
         </div>

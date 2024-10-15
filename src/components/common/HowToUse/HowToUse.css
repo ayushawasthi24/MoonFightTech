@@ -20,7 +20,7 @@
   .tokens {
     display: flex;
     justify-content: space-around;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: -20px;
     margin-left: -30px;
     width: 100%;
@@ -30,7 +30,7 @@
   .points {
     display: flex;
     justify-content: space-around;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: -20px;
     margin-left: -30px;
     width: 100%;
@@ -41,7 +41,7 @@
   .rewards {
     display: flex;
     justify-content: space-around;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: -20px;
     margin-left: -30px;
     width: 100%;

@@ -21,26 +21,19 @@ const HowToUse = () => {
     
     <div className="flex-container">
       
-      <div className="tokens">
         <div className="token-image">
         <img src="/icons/Group 427319659.png" alt="Group 1" width={25} height={25} />
-        </div>
         <h5>Build your<br />Team of<br />Tokens</h5>
-      </div>
-
-
-      <div className="points">
+        </div>
+      
         <div className="point-image">
         <img src="/icons/Group 427319845.png" alt="Group 1" width={25} height={25} />
-        </div>
         <h5>Earn Points<br />for each<br />Tokens</h5>
       </div>
 
 
-      <div className="rewards">
         <div className="reward-image">
         <img src="/icons/trophy-icon 1.png" alt="Group 2" width={25} height={27} />
-        </div>
         <h5>Win Rewards<br />based on<br />your Rank</h5>
       </div>
         </div>

@@ -52,7 +52,7 @@ const HowToUse = () => {
           color: 'white',
           height: '20px',
           padding: '12px',
-          marginLeft: '258px',
+          marginLeft: '268px',
           marginTop: '-10px',
           fontSize: '8.5px',
           borderRadius: '8px',

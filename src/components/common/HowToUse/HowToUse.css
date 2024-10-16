@@ -12,11 +12,9 @@
   
 .flex-container {
   display: flex;
-  width: 100%;
-  padding: 5px;
-  gap: 40px;
+  width: 105%;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 12px;
   margin-top: -11px;
   margin-left: -10px;
   gap: 10px;

@@ -17,7 +17,7 @@ const TokenList = () => {
       {tokens.map((token, index) => (
         <div
           key={index}
-          className="bg-[#353535] my-2 w-full rounded-md flex justify-between items-center px-2 py-2"
+          className="bg-[#353535] w-full rounded-md flex justify-between items-center px-2 py-2"
         >
           <div className="flex items-center">
             <div className="flex flex-col gap-2 items-center justify-center">
@@ -26,7 +26,9 @@ const TokenList = () => {
                 alt=""
                 className="w-[42px] h-[42px]"
               />
-              <h3 className="font-[600]">{token.name}</h3>
+              <h3 className="font-[600] text-[12px] text-[#D2D2D2]">
+                {token.name}
+              </h3>
             </div>
             <div className="flex flex-col items-center gap-2 text-[10px]">
               <p className="text-white">{token.price}</p>
@@ -58,7 +60,7 @@ const TokenList = () => {
           </div>
           <div className="mr-4">
             <AddCircle className="text-[#6B61FF]" />
-          </div>    
+          </div>
         </div>
       ))}
     </div>

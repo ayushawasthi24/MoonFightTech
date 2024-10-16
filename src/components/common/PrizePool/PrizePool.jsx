@@ -14,7 +14,7 @@ const PrizePool = () => {
 
   return (
     <div
-      className="prize-pool-container m-4"
+      className="prize-pool-container mx-2"
       onClick={() => navigate("/price-pool/sol-maxis-vs-eth-maxis/?type=winning")}
     >
       <div className="prize-info">

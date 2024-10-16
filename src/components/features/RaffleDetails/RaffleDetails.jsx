@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TokenSelection from "../../common/TokenSelection/TokenSelection";
 import TokenList from "../../common/TokenList/TokenList";
 import BottomBar from "../../common/BottomBar/BottomBar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/material/Tooltip";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PrizePool from "../../common/PrizePool/PrizePool";
+import Shimmer from "../../common/Shimmer/Shimmer";
+import fetcher from "../../../services/apiFetcher";
+import { toTitleCase } from "../../../utils/utils";
+import BackHeader from "../../common/BackHeader/BackHeader";
 
 const RaffleDetails = () => {
   const navigate = useNavigate();
+  const slugKey =
+    useLocation().pathname.split("/")[
+      useLocation().pathname.split("/").length - 1
+    ];
+
+  const [loading, setLoading] = useState(true);
+
+  const [contest, setContest] = useState(null);
+
+  useEffect(() => {
+    const fetchContests = async () => {
+      try {
+        const res = await fetcher.get(`/contests/${slugKey}`);
+        setContest(res);
+      } catch (error) {
+        console.error("Error fetching contests:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContests();
+  }, []);
+
   const buttons = [
     {
       text: "Preview your Clan",
@@ -34,59 +61,77 @@ const RaffleDetails = () => {
   ];
   return (
     <div className="bg-[#1E1E1E] min-h-screen text-white">
-      <div className="flex items-center justify-between p-4">
-        <div className="flex gap-2 items-center justify-center">
-          <ArrowBackIcon className="text-white" />
-          <img src="/images/sol.png" alt="Solana logo" className="rounded-full w-[20px] h-[20px]" />
-          <h2 className="text-[12px] font-bold">Sol Maxis vs Eth Maxis</h2>
-          <img
-            src="/images/eth.png"
-            alt="Ethereum logo"
-            className="w-[20px] h-[20px] rounded-full"
+      {loading ? (
+        <>
+          <div className="">
+            <Shimmer />
+          </div>
+        </>
+      ) : (
+        <>
+          {/* <div className="flex items-center justify-between p-4">
+            <div className="flex gap-2 items-center justify-center">
+              <ArrowBackIcon className="text-white" />
+              <img
+                src={contest?.teams[0].image_url}
+                alt="Solana logo"
+                className="rounded-full w-[20px] h-[20px]"
+              />
+              <h2 className="text-[12px] font-bold">
+                {toTitleCase(contest.name)}
+              </h2>
+              <img
+                src={contest.teams[1].image_url}
+                alt="Ethereum logo"
+                className="w-[20px] h-[20px] rounded-full"
+              />
+            </div>
+            <div className="text-red-500 text-sm">15m 30s</div> */}
+          <BackHeader
+            title={toTitleCase(contest?.name)}
+            img1={contest?.teams[0].image_url}
+            img2={contest?.teams[1].image_url}
           />
-        </div>
-        <div className="text-red-500 text-sm">15m 30s</div>
-      </div>
-      <PrizePool />
-      <TokenSelection />
-      <div className="flex justify-between items-center text-white px-4 mr-14">
-        {/* Token Column */}
-        <div className="w-1/3 text-center">
-          <p>Token</p>
-        </div>
 
-        {/* Avg Points Column */}
-        <div className="w-1/3 flex items-center justify-center ml-24">
-          <p className="text-center">Avg Points</p>
-          <Tooltip title="Average points of the token in the last 24 hours" placement="top">
-            <InfoOutlinedIcon className="text-gray-400" fontSize="small" />
-          </Tooltip>
-        </div>
+          <PrizePool
+            currentPrizePool={contest.currentPoolAmount}
+            maxPrizePool={contest.maxPoolAmount}
+            totalSpots={contest.totalSpots}
+            spotsTaken={contest.takenSpots}
+          />
+          <TokenSelection />
+          <div className="flex justify-between items-center text-white px-4 mr-14">
+            {/* Token Column */}
+            <div className="w-1/3 text-center">
+              <p>Token</p>
+            </div>
 
-        {/* Credits Column */}
-        <div className="w-1/3 text-right">
-          <p>Credits</p>
-        </div>
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <div onClick={() => navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")}>
-        <TokenList />
-      </div>
-      <BottomBar buttons={buttons} />
+            {/* Avg Points Column */}
+            <div className="w-1/3 flex items-center justify-center ml-24">
+              <p className="text-center">Avg Points</p>
+              <Tooltip
+                title="Average points of the token in the last 24 hours"
+                placement="top"
+              >
+                <InfoOutlinedIcon className="text-gray-400" fontSize="small" />
+              </Tooltip>
+            </div>
+
+            {/* Credits Column */}
+            <div className="w-1/3 text-right">
+              <p>Credits</p>
+            </div>
+          </div>
+          <div
+            onClick={() =>
+              navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")
+            }
+          >
+            <TokenList tokens={contest.tokens} />
+          </div>
+          <BottomBar buttons={buttons} />
+        </>
+      )}
     </div>
   );
 };

@@ -1,37 +1,38 @@
 import React from "react";
 import { AddCircle } from "@mui/icons-material";
+import { formatMarketCap } from "../../../utils/utils";
 
-const tokens = [
-  {
-    name: "Tim Walz",
-    price: "$0.0001251",
-    points: 56,
-    credits: 9.5,
-    marketCap: "$5mn+",
-  },
-];
+// const tokens = [
+//   {
+//     name: "Tim Walz",
+//     price: "$0.0001251",
+//     points: 56,
+//     credits: 9.5,
+//     marketCap: "$5mn+",
+//   },
+// ];
 
-const TokenList = () => {
+const TokenList = ({ tokens }) => {
   return (
-    <div>
+    <div className="pb-[100px]">
       {tokens.map((token, index) => (
         <div
           key={index}
-          className="bg-[#353535] w-full rounded-md flex justify-between items-center px-2 py-2"
+          className="bg-[#353535] w-full flex justify-between items-center px-2 py-2 my-2"
         >
           <div className="flex items-center">
             <div className="flex flex-col gap-2 items-center justify-center">
               <img
-                src="/images/timwalz.png"
-                alt=""
+                src={token.image_url}
+                alt={token.name}
                 className="w-[42px] h-[42px]"
               />
               <h3 className="font-[600] text-[12px] text-[#D2D2D2]">
-                {token.name}
+                {token.symbol}
               </h3>
             </div>
             <div className="flex flex-col items-center gap-2 text-[10px]">
-              <p className="text-white">{token.price}</p>
+              <p className="text-white">{token.price_usd.toFixed(4)}</p>
               <svg
                 width="42"
                 height="16"
@@ -50,13 +51,15 @@ const TokenList = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <div className="text-center">
-                <p className="font-bold">{token.points}</p>
+                <p className="font-bold">{token.avg_points}</p>
               </div>
               <div className="text-center">
                 <p className="font-bold">{token.credits}</p>
               </div>
             </div>
-            <p className="text-xs text-white">Market Cap: {token.marketCap}</p>
+            <p className="text-xs text-white">
+              Market Cap: ${formatMarketCap(token.market_cap_usd)}
+            </p>
           </div>
           <div className="mr-4">
             <AddCircle className="text-[#6B61FF]" />

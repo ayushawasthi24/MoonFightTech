@@ -1,8 +1,8 @@
 import axios from "axios";
-import { API_BASE_URL } from "./constant/appConstants";
+import { API_BASE_URL } from "../constants/appConstants";
 
 // Create an instance of axios with base configuration
-let Api = axios.create({
+let axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   "Content-Type": "application/json",
 });
@@ -19,7 +19,7 @@ const getToken = () => {
 };
 
 // Request interceptor to add the token to the request headers
-Api.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   (request) => {
     // Attach authorization header for protected routes
     if (
@@ -43,7 +43,7 @@ Api.interceptors.request.use(
 );
 
 // Response interceptor
-Api.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => {
     return response?.data;
   },
@@ -64,4 +64,4 @@ Api.interceptors.response.use(
   }
 );
 
-export default Api;
+export default axiosInstance;

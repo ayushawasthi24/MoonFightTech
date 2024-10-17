@@ -30,16 +30,18 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
   },
+
   row: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: '20px',
+    marginBottom: '5px',
   },
 
   card: {
     width: '150px',
     margin: '20px',
     textAlign: 'center',  // Center-align text
+    backgroundColor: '#353535',
     border: '1px solid #ccc',
     borderRadius: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
@@ -55,35 +57,41 @@ const useStyles = createUseStyles({
     height: '150px',
     borderRadius: '8px 8px 0 0',
   },
+
   button: {
     position: 'absolute',
-    bottom: '43px',
-    right: '-18px',
+    bottom: '40px',
+    right: '-22px',
     borderRadius: '50%',
     padding: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
     '& img': {
-      width: '16px', // Adjust size as needed
-      height: '16px',
+      width: '30px', // Adjust size as needed
+      height: '30px',
     },
   },
 
   crown: {
     position: 'absolute',
-    top: '-18px',
-    right: '-15px',
-    width: '30px',
-    height: '30px',
+    top: '-12px',
+    right: '-10px',
+    width: '20px',
   },
 
  name: {
-    fontWeight: 'bold',
-    marginTop: '10px',
-    marginBottom: '0px',
-    fontSize: '16px',
+    fontWeight: '300',
+    width: '82px',
+    height: '17px',
+    top: '471px',
+    left: '226px',
+    fontSize: '14px',
+    fontStyle: 'Inter',
+    lineHeight: '20px',
+    letter: '2px',
     textAlign: 'center',  // Center-align name text
   },
+
   credits: {
     marginTop: '0px',
     fontSize: '14px',

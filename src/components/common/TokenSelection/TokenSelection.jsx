@@ -1,6 +1,6 @@
 import React from "react";
 
-const TokenSelection = () => {
+const TokenSelection = ({ tokens, selectedTokens }) => {
   return (
     <div className="my-4 rounded-md p-4">
       <div className="flex justify-between items-center">

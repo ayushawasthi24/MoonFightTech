@@ -23,6 +23,15 @@ const RaffleDetails = () => {
 
   const [contest, setContest] = useState(null);
 
+  const [selectedTokens, setSelectedTokens] = useState([]);
+
+  const handleTokenSelect = (token) => {
+    if (selectedTokens.includes(token)) {
+      setSelectedTokens(selectedTokens.filter((t) => t !== token));
+    } else {
+      setSelectedTokens([...selectedTokens, token]);
+    }
+  };
   useEffect(() => {
     const fetchContests = async () => {
       try {
@@ -69,24 +78,6 @@ const RaffleDetails = () => {
         </>
       ) : (
         <>
-          {/* <div className="flex items-center justify-between p-4">
-            <div className="flex gap-2 items-center justify-center">
-              <ArrowBackIcon className="text-white" />
-              <img
-                src={contest?.teams[0].image_url}
-                alt="Solana logo"
-                className="rounded-full w-[20px] h-[20px]"
-              />
-              <h2 className="text-[12px] font-bold">
-                {toTitleCase(contest.name)}
-              </h2>
-              <img
-                src={contest.teams[1].image_url}
-                alt="Ethereum logo"
-                className="w-[20px] h-[20px] rounded-full"
-              />
-            </div>
-            <div className="text-red-500 text-sm">15m 30s</div> */}
           <BackHeader
             title={toTitleCase(contest?.name)}
             img1={contest?.teams[0].image_url}
@@ -99,16 +90,19 @@ const RaffleDetails = () => {
             totalSpots={contest.totalSpots}
             spotsTaken={contest.takenSpots}
           />
-          <TokenSelection />
-          <div className="flex justify-between items-center text-white px-4 mr-14">
+          <TokenSelection
+            tokens={contest.tokens}
+            selectedTokens={selectedTokens}
+          />
+          <div className="grid grid-cols-10 text-white px-4">
             {/* Token Column */}
-            <div className="w-1/3 text-center">
-              <p>Token</p>
+            <div className="text-center col-span-4">
+              <p className="font-[700] text-[12px]">Token</p>
             </div>
 
             {/* Avg Points Column */}
-            <div className="w-1/3 flex items-center justify-center ml-24">
-              <p className="text-center">Avg Points</p>
+            <div className="col-span-3 flex items-center justify-center">
+              <p className="text-center font-[700] text-[12px]">Avg Points</p>
               <Tooltip
                 title="Average points of the token in the last 24 hours"
                 placement="top"
@@ -118,17 +112,15 @@ const RaffleDetails = () => {
             </div>
 
             {/* Credits Column */}
-            <div className="w-1/3 text-right">
-              <p>Credits</p>
+            <div className="col-span-3">
+              <p className="font-[700] text-[12px]">Credits</p>
             </div>
           </div>
-          <div
-            onClick={() =>
-              navigate("/token-details/sol-maxis-vs-eth-maxis/?type=winning")
-            }
-          >
-            <TokenList tokens={contest.tokens} />
-          </div>
+          <TokenList
+            tokens={contest.tokens}
+            selectedTokens={selectedTokens}
+            onTokenSelect={handleTokenSelect}
+          />
           <BottomBar buttons={buttons} />
         </>
       )}

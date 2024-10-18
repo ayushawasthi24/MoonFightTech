@@ -90,10 +90,7 @@ const RaffleDetails = () => {
             totalSpots={contest.totalSpots}
             spotsTaken={contest.takenSpots}
           />
-          <TokenSelection
-            tokens={contest.tokens}
-            selectedTokens={selectedTokens}
-          />
+          <TokenSelection contest={contest} selectedTokens={selectedTokens} />
           <div className="grid grid-cols-10 text-white px-4">
             {/* Token Column */}
             <div className="text-center col-span-4">

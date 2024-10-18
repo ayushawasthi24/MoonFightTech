@@ -3,10 +3,13 @@ import Header from "../../common/Header/Header";
 import RafflesCard from "../../common/RafflesCard/RafflesCard";
 import HowToUse from "../../common/HowToUse/HowToUse";
 import PrizePool from "../../common/PrizePool/PrizePool";
+import TemporaryDrawer from "../../common/AvatarGrid/TemporaryDrawer";
+
 
 const Home = () => {
   return (
     <>
+      <TemporaryDrawer/>
       <Header />
       <HowToUse/>
       <PrizePool/>

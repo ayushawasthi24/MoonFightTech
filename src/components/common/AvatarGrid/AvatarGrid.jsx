@@ -15,8 +15,10 @@ const useStyles = createUseStyles({
   header: {
     backgroundImage: `url('images/Mask group.png')`,
     padding: '20px 0',
-    fontSize: '12px',
+    font: 'Poppins',
+    fontSize: '14px',
     fontWeight: '500',
+    lineHeight: '20.44px',
     gap: '-20px',
     display: 'flex',
     justifyContent: 'center',
@@ -42,7 +44,8 @@ const useStyles = createUseStyles({
     margin: '20px',
     textAlign: 'center',  // Center-align text
     backgroundColor: '#353535',
-    border: '1px solid #ccc',
+    border: '1px solid',
+    borderColor: '#6b61ff' ,
     borderRadius: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
     display: 'flex',
@@ -60,7 +63,7 @@ const useStyles = createUseStyles({
 
   button: {
     position: 'absolute',
-    bottom: '40px',
+    bottom: '45px',
     right: '-22px',
     borderRadius: '50%',
     padding: '8px',
@@ -85,17 +88,25 @@ const useStyles = createUseStyles({
     height: '17px',
     top: '471px',
     left: '226px',
-    fontSize: '14px',
-    fontStyle: 'Inter',
+    fontSize: '16px',
+    fontFamily: 'Arial',
+    margin: '0',
+    color: '#d9d9d9',
     lineHeight: '20px',
-    letter: '2px',
     textAlign: 'center',  // Center-align name text
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '7px'
+
   },
 
   credits: {
     marginTop: '0px',
     fontSize: '14px',
-    color: '#aaaaaa',
+    color: '#d9d9d9',
+    fontFamily: 'Arial',
+    paddingTop: '14px',
+    paddingBottom: '7px',
     textAlign: 'center',  // Center-align credits text
   },
 
@@ -104,8 +115,10 @@ const useStyles = createUseStyles({
     backgroundColor: '#6200EE',
     borderRadius: '40px',
     color: '#ffffff',
-    fontWeight: 'bold',
+    fontWeight: '700',
     cursor: 'pointer',
+    fontSize: '14px',
+    lineHeight: '16.94px'
   },
 });
 

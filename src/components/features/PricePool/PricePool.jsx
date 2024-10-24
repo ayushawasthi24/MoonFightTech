@@ -60,7 +60,7 @@ const PricePool = () => {
       }
     };
     fetchData();
-  }, [slug, search]);
+  }, [slug]);
 
   if (!apiResponse) return <div>Loading...</div>;
 

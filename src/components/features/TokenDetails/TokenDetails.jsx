@@ -40,8 +40,12 @@ const TokenDetails = () => {
           <div>
             <h3 className="text-[12px] text-[#D2D2D2]">$Wif</h3>
             <div className="flex flex-row justify-center items-center gap-2">
-              <span className="text-[14px] text-white font-[600]">Tim Walz</span>
-              <span className="font-[400] text-white text-[8px] text-[#D2D2D2]">10 days ago</span>
+              <span className="text-[14px] text-white font-[600]">
+                Tim Walz
+              </span>
+              <span className="font-[400] text-white text-[8px] text-[#D2D2D2]">
+                10 days ago
+              </span>
             </div>
           </div>
         </div>
@@ -51,7 +55,11 @@ const TokenDetails = () => {
             <img src="/images/X.png" alt="" className="w-[42px] h-[42px]" />
           </IconButton>
           <IconButton className="text-white">
-            <img src="/images/telegram.png" alt="" className="w-[42px] h-[42px]" />
+            <img
+              src="/images/telegram.png"
+              alt=""
+              className="w-[42px] h-[42px]"
+            />
           </IconButton>
         </div>
       </div>
@@ -62,7 +70,8 @@ const TokenDetails = () => {
         <div>
           <p className="text-[16px] font-[600]">$ 0.00421</p>
           <p className="text-[#4FC17F] text-[12px]">
-            <KeyboardArrowUpIcon /> 50% <span className="text-[#D2D2D2] text-[8px]">all time</span>
+            <KeyboardArrowUpIcon /> 50%{" "}
+            <span className="text-[#D2D2D2] text-[8px]">all time</span>
           </p>
         </div>
 
@@ -153,8 +162,8 @@ const TokenDetails = () => {
           value="$1.3Mn"
           buyLabel="Buy Vol"
           sellLabel="Sell Vol"
-          buyValue="$1.2Mn"
-          sellValue="$0.1Mn"
+          buyValue="1.2"
+          sellValue="0.1"
           buyColor="bg-[#46DAAE]"
           sellColor="bg-[#FF4545]"
         />
@@ -175,7 +184,16 @@ const TokenDetails = () => {
   );
 };
 
-function Metric({ label, value, buyLabel, sellLabel, buyValue, sellValue, buyColor, sellColor }) {
+function Metric({
+  label,
+  value,
+  buyLabel,
+  sellLabel,
+  buyValue,
+  sellValue,
+  buyColor,
+  sellColor,
+}) {
   const total = parseInt(buyValue) + parseInt(sellValue);
   const buyWidth = (parseInt(buyValue) / total) * 100;
   const sellWidth = (parseInt(sellValue) / total) * 100;
@@ -189,15 +207,25 @@ function Metric({ label, value, buyLabel, sellLabel, buyValue, sellValue, buyCol
       <div className="w-[130px]">
         <div className="flex justify-between mb-1">
           <span className="text-xs font-medium text-[#D2D2D2]">{buyLabel}</span>
-          <span className="text-xs font-medium text-[#D2D2D2]">{sellLabel}</span>
+          <span className="text-xs font-medium text-[#D2D2D2]">
+            {sellLabel}
+          </span>
         </div>
         <div className="flex h-2 mb-1">
-          <div className={`${buyColor} rounded-[60px]`} style={{ width: `${buyWidth}%` }}></div>
-          <div className={`${sellColor} rounded-[60px]`} style={{ width: `${sellWidth}%` }}></div>
+          <div
+            className={`${buyColor} rounded-[60px]`}
+            style={{ width: `${buyWidth}%` }}
+          ></div>
+          <div
+            className={`${sellColor} rounded-[60px]`}
+            style={{ width: `${sellWidth}%` }}
+          ></div>
         </div>
         <div className="flex justify-between">
           <span className="text-xs font-[10px] text-[#D2D2D2]">{buyValue}</span>
-          <span className="text-xs font-[10px] text-[#D2D2D2]">{sellValue}</span>
+          <span className="text-xs font-[10px] text-[#D2D2D2]">
+            {sellValue}
+          </span>
         </div>
       </div>
     </div>

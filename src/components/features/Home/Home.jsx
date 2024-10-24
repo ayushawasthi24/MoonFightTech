@@ -32,21 +32,6 @@ const Home = () => {
             <RafflesCard raffleData={contest} />
           </div>
         ))}
-        {/* <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
-          <RafflesCard />
-        </div>
-        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
-          <RafflesCard />
-        </div>
-        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
-          <RafflesCard />
-        </div>
-        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
-          <RafflesCard />
-        </div>
-        <div onClick={() => navigate("/game/sol-maxis-vs-eth-maxis")}>
-          <RafflesCard />
-        </div> */}
       </div>
       <BottomNavbar />
     </>

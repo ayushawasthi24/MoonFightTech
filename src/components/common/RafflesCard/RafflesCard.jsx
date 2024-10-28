@@ -1,9 +1,11 @@
 import React from "react";
 import { calculateRemainingTime, formatDate } from "../../../utils/utils";
 
-export default function RafflesCard({ raffleData }) {
+export default function RafflesCard({ raffleData, customWidth = "w-full" }) {
   return (
-    <div className="w-full bg-[#353535] rounded-[12px] overflow-hidden shadow-lg h-[126px] my-[12px]">
+    <div
+      className={`${customWidth} bg-[#353535] rounded-[12px] overflow-hidden shadow-lg h-[126px] my-[12px]`}
+    >
       <div className="flex justify-between h-[19px] text-white text-[10px] bg-[#535353] text-xs">
         <span className="my-auto ml-[10px] text-[10px] font-[400]">
           Start: {formatDate(raffleData.startDate)}

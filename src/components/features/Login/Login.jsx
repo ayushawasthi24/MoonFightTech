@@ -1,30 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import WalletConnect from "@walletconnect/client";
 import { ethers } from "ethers";
 import { Connection, PublicKey } from "@solana/web3.js";
+import fetcher from "../../../services/apiFetcher";
 
 const Login = () => {
   const navigate = useNavigate();
   const [account, setAccount] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
 
-  // const connector = new WalletConnect({
-  //   bridge: "https://bridge.walletconnect.org", // Bridge server
-  //   qrcode: true,
-  // });
-
   const connectMetamaskWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
-        // Request account access
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        const address = signer.address;
+
+        const nonceResponse = await fetcher.post(`/auth/request-nonce`, {
+          address,
         });
-        setAccount(accounts[0]); // Set the first account
-        navigate("/home");
+        const { nonce } = nonceResponse;
+
+        const message = `Sign this message to log in: ${nonce}`;
+        const signature = await signer.signMessage(message);
+
+        const verifyResponse = await fetcher.post(`/auth/verify`, {
+          address,
+          signature,
+        });
+        const result = verifyResponse;
+
+        if (result && result.user) {
+          setAccount(address);
+          localStorage.setItem("user", JSON.stringify(result.user));
+          localStorage.setItem("tokens", JSON.stringify(result.tokens));
+          localStorage.setItem("token", result.tokens.access.token);
+          navigate("/home");
+        } else {
+          alert("Login failed");
+        }
       } catch (error) {
-        console.error("Error connecting to MetaMask", error);
+        console.error("Error during login process:", error);
+        alert("An error occurred while connecting your wallet.");
       }
     } else {
       alert("Please install MetaMask!");
@@ -62,35 +81,12 @@ const Login = () => {
     }
   };
 
-  // const connectTrustWallet = async () => {
-  //   // Check if already connected
-  //   if (!connector.connected) {
-  //     // Create a new session
-  //     await connector.createSession();
-  //   }
-
-  //   // Subscribe to connection events
-  //   connector.on("connect", (error, payload) => {
-  //     if (error) {
-  //       throw error;
-  //     }
-  //     const { accounts } = payload.params[0];
-  //     setAccount(accounts[0]);
-  //   });
-
-  //   connector.on("disconnect", (error) => {
-  //     if (error) {
-  //       throw error;
-  //     }
-  //     setAccount(null);
-  //   });
-
-  //   // If already connected, simply get accounts
-  //   if (connector.connected) {
-  //     const { accounts } = connector;
-  //     setAccount(accounts[0]);
-  //   }
-  // };
+  // navigate to home if local storage contains user and tokens
+  useEffect(() => {
+    if (localStorage.getItem("user") && localStorage.getItem("tokens")) {
+      navigate("/home");
+    }
+  }, []);
 
   return (
     <div className="h-screen flex items-center justify-center bg-[url('/images/loginbg.png')] bg-cover overflow-hidden">

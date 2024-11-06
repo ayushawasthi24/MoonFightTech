@@ -46,6 +46,28 @@ const RaffleDetails = () => {
     fetchContests();
   }, []);
 
+  const joinContest = async (contestId, tokenList) => {
+    const url = `/contests/join/${contestId}`;
+
+    const tokens = tokenList.map((token) => token._id);
+    console.log(tokens);
+    
+    try {
+      const response = await fetcher.post(
+        url,
+        {
+          tokens: tokens,
+        },
+      );
+      console.log("Contest joined successfully:", response);
+      alert("Contest joined successfully");
+      return response.data;
+    } catch (error) {
+      console.error("Error joining contest:", error);
+      throw error;
+    }
+  };
+
   const buttons = [
     {
       text: "Preview your Clan",
@@ -62,10 +84,10 @@ const RaffleDetails = () => {
       onClick: () => console.log("Preview your Clan"),
     },
     {
-      text: "How it Works",
+      text: selectedTokens.length > 0 ? "Save" : "Select Tokens",
       bgColor: "bg-white",
       textColor: "text-[#6B61FF] hover:bg-gray-100",
-      onClick: () => console.log("How it Works"),
+      onClick: () => selectedTokens.length > 0 ? joinContest(slugKey, selectedTokens) : console.log("Select Tokens"),
     },
   ];
   return (

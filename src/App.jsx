@@ -7,6 +7,7 @@ import PricePool from "./components/features/PricePool/PricePool";
 import TokenDetails from "./components/features/TokenDetails/TokenDetails";
 import Wallet from "./components/features/Wallet/Wallet";
 import Profile from "./components/features/Profile/Profile";
+import GraphComponent from "./components/features/Graph";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/token-details/:slug" element={<TokenDetails />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/graph" element={<GraphComponent />} />
       </Routes>
     </Router>
   );

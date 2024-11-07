@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import BackHeader from "../../common/BackHeader/BackHeader";
 import CustomToggle from "../../common/CustomToggle/CustomToggle";
+import CustomModal from "../../common/CustomModal/CustomModal";
 import BottomBar from "../../common/BottomBar/BottomBar";
 import { Wallet, Download, Upload, X, Copy } from "lucide-react";
 
 const WalletPage = () => {
   const [isDepositOpen, setIsDepositOpen] = useState(false);
+  const closeModal = () => setIsDepositOpen(false);
   const doneButton = [
     {
       text: "Done",
@@ -119,41 +121,44 @@ const WalletPage = () => {
         </div>
       </div>
       {/* Deposit Modal */}
-      {isDepositOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end">
-          <div className="bg-[#353535] w-full p-6 rounded-t-3xl h-[360px]">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-semibold">Deposit Funds</h2>
-              <button onClick={() => setIsDepositOpen(false)}>
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-[#1E1E1E] rounded-lg p-3">
-                {/* <label className="text-sm text-gray-400 block mb-2"></label> */}
-                <select className="w-full bg-[#1E1E1E]">
-                  <option>Select chain for USDC Deposit</option>
-                </select>
-              </div>
-
-              <div className="bg-[#1E1E1E] rounded-lg p-4 flex justify-between items-center">
-                <div className="text-sm font-mono overflow-hidden overflow-ellipsis">
-                  0xjwdjenlnfklnlkewfnlnlnlw
-                </div>
-                <Copy className="w-5 h-5" />
-              </div>
-
-              <div className="text-[12px] font-400 text-[#D2D2D2]">
-                Note: Please deposit crypto using only the network specified
-                above.
-              </div>
-
-              <BottomBar buttons={doneButton} />
-            </div>
-          </div>
+      <CustomModal
+        isOpen={isDepositOpen}
+        onClose={closeModal}
+        title="Deposit Funds"
+        customStyles={{ overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" } }}
+      >
+        {/* Example 1: Chain Selection and Address */}
+        <div className="bg-[#1E1E1E] rounded-lg p-3">
+          <select className="w-full bg-[#1E1E1E]">
+            <option value="" disabled>
+              Select chain for USDC Deposit
+            </option>
+            <option value="Ethereum">Ethereum</option>
+            <option value="Polygon">Polygon</option>
+          </select>
         </div>
-      )}
+
+        <div className="bg-[#1E1E1E] rounded-lg p-4 flex justify-between items-center">
+          <div className="text-sm font-mono overflow-hidden overflow-ellipsis">
+            0xjwdjenInfklnIkeWfnlnlnlw
+          </div>
+          <Copy className="w-5 h-5" />
+        </div>
+
+        <div className="text-[12px] font-400 text-[#D2D2D2]">
+          Note: Please deposit USDC using only the network specified above.
+        </div>
+
+        {/* Done Button */}
+        <div className="mt-6">
+          <button
+            onClick={closeModal}
+            className="bg-[#5A5AFF] text-white py-2 px-4 rounded-lg w-full"
+          >
+            Done
+          </button>
+        </div>
+      </CustomModal>
     </div>
   );
 };

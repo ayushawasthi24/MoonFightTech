@@ -11,7 +11,7 @@ const TokenList = ({ tokens, selectedTokens, onTokenSelect }) => {
           <div
             key={index}
             className={`w-full grid grid-cols-2 px-2 py-2 my-2 ${
-              selectedTokens.includes(token) ? "bg-[#6B61FF]" : "bg-[#353535]"
+              isSelected ? "bg-[#6B61FF]" : "bg-[#353535]"
             }`}
           >
             <div className="grid grid-cols-2">

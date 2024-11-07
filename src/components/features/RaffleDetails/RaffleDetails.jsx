@@ -66,6 +66,7 @@ const RaffleDetails = () => {
 
   const joinContest = async () => {
     const tokens = selectedTokens.map((token) => token._id);
+    setLoading(true);
 
     try {
       const response = await fetcher.post(`/contests/join/${contest._id}`, {
@@ -75,6 +76,8 @@ const RaffleDetails = () => {
       setJoinSuccess(true);
     } catch (error) {
       console.error("Error joining contest:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -157,7 +160,11 @@ const RaffleDetails = () => {
         onClose={closeModal}
         title="Confirm your participation"
       >
-        {joinSuccess ? (
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[200px]">
+            <div className="w-12 h-12 border-4 border-t-[#6B61FF] border-solid border-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : joinSuccess ? (
           <div className="p-6 text-center">
             <h2 className="text-2xl font-bold mb-4">Success!</h2>
             <p>You have successfully joined the contest.</p>

@@ -207,7 +207,7 @@ const RaffleDetails = () => {
                     src="/images/coin.png"
                     alt="icon"
                     className="w-4 h-4 mr-1"
-                  />{" "}
+                  />
                   {entryFee}
                 </span>
               </div>

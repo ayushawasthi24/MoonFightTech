@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../common/Header/Header";
 import RafflesCard from "../../common/RafflesCard/RafflesCard";
-import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
-import { useNavigate } from "react-router-dom";
 import HowToUse from "../../common/HowToUse/HowToUse";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import fetcher from "../../../services/apiFetcher";
+import { useNavigate } from "react-router-dom";
+import TemporaryDrawer from "../../common/AvatarGrid/TemporaryDrawer";
+import PrizePool from "../../common/PrizePool/PrizePool";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Home = () => {
 
   return (
     <>
+      <TemporaryDrawer />
       <Header />
       <HowToUse />
       <div className="p-2 bg-[#1E1E1E] h-screen w-screen">
@@ -49,7 +51,6 @@ const Home = () => {
           </>
         )}
       </div>
-      <BottomNavbar />
     </>
   );
 };

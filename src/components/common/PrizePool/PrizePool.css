@@ -42,32 +42,28 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .prize-actions {
   display: flex;
+  width: 100%;
   justify-content: space-between;
-}
-
-.win-button,
-.point-button,
-.graph-button {
-  /* background-color: #2b2b2b; */
-  display: flex;
   align-items: center;
   /* width: 200px; */
-  height: 10px;
+  height: 15px;
   /* top: 88px; */
-  /* gap: 2px; */
-  font-size: 10px;
-  margin-left: 20px;
-}
+  /*gap: 1px; */
+  font-size: 11px;
+  margin-left: 2px;
+  }
+
 
 .win-icon,
 .point-icon,
 .graph-icon {
-  margin-right: 10px;
+  margin-right: -10px;
+  margin-top: 0px;
 }
 
 .action-button:hover {

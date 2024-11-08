@@ -95,7 +95,7 @@ const BottomNavbar = () => {
         </svg>
       ),
       label: "My Raffles",
-      path: "/raffles",
+      path: "/my-raffles",
     },
     {
       icon: (

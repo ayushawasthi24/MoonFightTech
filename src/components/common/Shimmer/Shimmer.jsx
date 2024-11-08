@@ -5,7 +5,7 @@ const Spinner = ({ size = "40px", color = "#6B61FF" }) => {
     <div className="flex justify-center items-center min-h-screen bg-[#1E1E1E]">
       <div className="relative" style={{ width: size, height: size }}>
         <div
-          className="absolute inset-0 border-4 border-t-transparent border-solid rounded-full animate-spin-slow"
+          className="absolute inset-0 border-4 border-t-transparent border-solid rounded-full animate-spin"
           style={{
             borderColor: `${color}`,
             borderWidth: `calc(${size} / 8)`,

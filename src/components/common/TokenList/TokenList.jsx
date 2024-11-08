@@ -46,7 +46,7 @@ const TokenList = ({ tokens, selectedTokens, onTokenSelect }) => {
               <div className="grid grid-rows-2 col-span-2 items-center">
                 <div className="grid grid-cols-2">
                   <div className="text-center">
-                    <p className="font-[400] text-[14px]">{token.avg_points}</p>
+                    <p className="font-[400] text-[14px]">{token.avg_points > 0 ? token.avg_points : "NA"}</p>
                   </div>
                   <div className="text-center">
                     <p className="font-[400] text-[14px]">{token.credits}</p>

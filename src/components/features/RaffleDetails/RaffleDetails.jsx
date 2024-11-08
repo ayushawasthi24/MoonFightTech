@@ -69,7 +69,7 @@ const RaffleDetails = () => {
     setLoading(true);
 
     try {
-      const response = await fetcher.post(`/contests/join/${contest._id}`, {
+      const response = await fetcher.post(`/contests/join/${slugKey}`, {
         tokens,
       });
       console.log("Contest joined successfully:", response);
@@ -97,7 +97,7 @@ const RaffleDetails = () => {
       onClick: () => console.log("Preview your Clan"),
     },
     {
-      text: selectedTokens.length > 0 ? "Next" : "Select Tokens",
+      text: selectedTokens.length > 0 ? "Next" : "How It Works",
       bgColor: "bg-white",
       textColor: "text-[#6B61FF] hover:bg-gray-100",
       onClick: openModal,

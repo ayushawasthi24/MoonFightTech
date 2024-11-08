@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./components/features/Login/Login";
 import Home from "./components/features/Home/Home";
+import MyRaffles from "./components/features/MyRaffles/MyRaffles";
 import GlobalStyle from "./styles/globalStyles";
 import RaffleDetails from "./components/features/RaffleDetails/RaffleDetails";
 import PricePool from "./components/features/PricePool/PricePool";
@@ -17,6 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/my-raffles" element={<MyRaffles />} />
         <Route path="/game/:slug" element={<RaffleDetails />} />
         <Route path="/price-pool/:slug" element={<PricePool />} />
         <Route path="/token-details/:slug" element={<TokenDetails />} />

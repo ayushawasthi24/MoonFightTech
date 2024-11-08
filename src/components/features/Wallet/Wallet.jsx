@@ -4,6 +4,7 @@ import CustomToggle from "../../common/CustomToggle/CustomToggle";
 import CustomModal from "../../common/CustomModal/CustomModal";
 import BottomBar from "../../common/BottomBar/BottomBar";
 import { Wallet, Download, Upload, X, Copy } from "lucide-react";
+import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 
 const WalletPage = () => {
   const [isDepositOpen, setIsDepositOpen] = useState(false);
@@ -159,6 +160,7 @@ const WalletPage = () => {
           </button>
         </div>
       </CustomModal>
+      {!isDepositOpen && <BottomNavbar />}
     </div>
   );
 };

@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomToggle from "../../common/CustomToggle/CustomToggle";
 import BackHeader from "../../common/BackHeader/BackHeader";
 import BottomBar from "../../common/BottomBar/BottomBar";
+import Shimmer from "../../common/Shimmer/Shimmer";
 import fetcher from "../../../services/apiFetcher";
 
 const PricePool = () => {
@@ -62,7 +63,7 @@ const PricePool = () => {
     fetchData();
   }, [slug]);
 
-  if (!apiResponse) return <div>Loading...</div>;
+  if (!apiResponse) return <Shimmer />;
 
   const { winnings, leaderboard, pointsCalculation } = apiResponse;
 

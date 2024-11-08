@@ -3,6 +3,7 @@ import { Copy, ChevronRight, Star } from "lucide-react";
 import RafflesCard from "../../common/RafflesCard/RafflesCard";
 import fetcher from "../../../services/apiFetcher";
 import Shimmer from "../../common/Shimmer/Shimmer";
+import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -86,6 +87,7 @@ const UserProfile = () => {
           </div>
         </>
       )}
+      <BottomNavbar />
     </div>
   );
 };

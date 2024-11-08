@@ -1,10 +1,21 @@
-// Header.jsx
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import fetcher from "../../../services/apiFetcher";
 const Header = () => {
+  const [balance, setBalance] = useState(0);
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await fetcher.get("/users/balance");
+        setBalance(response.balance);
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+      }
+    };
+    fetchBalance();
+  }, []);
+
   return (
     <header className="bg-gradient-to-b from-gray-900 to-gray-800 p-6 flex justify-between items-center w-screen">
-      
       <svg
         width="65"
         height="21"
@@ -18,13 +29,13 @@ const Header = () => {
         />
       </svg>
 
-      <div className="flex justify-center items-center bg-[#FFFFFF33] rounded-[70px] px-[8px] w-[48px] h-[24px] gap-[8px]">
+      <div className="flex justify-center items-center bg-[#FFFFFF33] rounded-[70px] px-[8px] w-[52px] h-[24px] gap-[8px]">
         <img
-          src="https://s3-alpha-sig.figma.com/img/2654/d0ea/7067f6da4d09a20d5d807a46ea193b8e?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UhFJsAcEfgHYBjlUBwEnM5V2DsjYfyWLTwGLq0-rAQaf-MWKlhdz6k~Ffi1~WeYIeturxT2X6iXKyGPW4tYNLfcYzjpWHmpBXw154HaKnJ8CRARJFm~mKy7EHw-Toi4wcyYWL5aeO-gz1KjoTKgVjPxJqwsfeSlTLuMc0roHyX45rDHx2RFR9Y~N0wyYvPDBL7vqzmNfj9FT0YEA~txcFpSlWHHEvlgioAFjmoH6B2sVhkLMlcjcyXp78PiOBcqz6W7hbYWWwTITFy~aSc~4illXRLcRZZewgbAK6Dco4adkgU6nXHzT~x3Qmb424vWMEyhl~Xmzn85KiaEwN4j~NQ__"
+        src="/images/coin.png"
           alt="Coin Icon"
           className="w-[16px] h-[16.5px]"
         />
-        <span className="text-white mt-1 text-[12px]">0</span>
+        <span className="text-white mt-1 text-[12px]">{balance}</span>
       </div>
     </header>
   );

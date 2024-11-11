@@ -11,6 +11,9 @@ import Shimmer from "../../common/Shimmer/Shimmer";
 import fetcher from "../../../services/apiFetcher";
 import { toTitleCase } from "../../../utils/utils";
 import BackHeader from "../../common/BackHeader/BackHeader";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import AvatarGrid from "../../common/AvatarGrid/AvatarGrid";
 
 const RaffleDetails = () => {
   const navigate = useNavigate();
@@ -23,6 +26,11 @@ const RaffleDetails = () => {
   const [accountBalance, setAccountBalance] = useState(0);
   const [entryFee, setEntryFee] = useState(0);
   const [joinSuccess, setJoinSuccess] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setDrawerOpen(newOpen);
+  };
 
   useEffect(() => {
     const fetchContestDetails = async () => {
@@ -94,7 +102,7 @@ const RaffleDetails = () => {
       ),
       bgColor: "bg-[#6B61FF]",
       textColor: "text-white",
-      onClick: () => console.log("Preview your Clan"),
+      onClick: toggleDrawer(true),
     },
     {
       text: selectedTokens.length > 0 ? "Next" : "How It Works",
@@ -154,6 +162,20 @@ const RaffleDetails = () => {
       )}
 
       <BottomBar buttons={buttons} />
+
+      {/* Drawer for Avatar Grid */}
+      <div>
+        <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
+          <Box
+            sx={{ width: 390 }}
+            role="presentation"
+            onClick={toggleDrawer(false)}
+          >
+            {/* Render AvatarGrid inside the drawer */}
+            <AvatarGrid selectedTokens={selectedTokens}/>
+          </Box>
+        </Drawer>
+      </div>
 
       <CustomModal
         isOpen={isModalOpen}

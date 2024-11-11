@@ -29,7 +29,6 @@ const Home = () => {
 
   return (
     <>
-      <TemporaryDrawer />
       <Header />
       <HowToUse />
       <div className="p-2 bg-[#1E1E1E] h-screen w-screen">

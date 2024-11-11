@@ -4,25 +4,42 @@ import RafflesCard from "../../common/RafflesCard/RafflesCard";
 import fetcher from "../../../services/apiFetcher";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
+import { getUserData, saveUserData } from "../../../utils/indexedDb";
+
+const DATA_MAX_AGE = 1000 * 60 * 60 * 24; // 24 hours
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const loadUserData = async () => {
       try {
-        const response = await fetcher.get("/users/profile");
-        setUserData(response);
-        setLoading(false);
+        let id = JSON.parse(localStorage.getItem("user")).id;
+        const storedData = await getUserData(id);
+        console.log(storedData);
+        const now = Date.now();
+
+        if (storedData && now - storedData.fetchedAt < DATA_MAX_AGE) {
+          console.log("Using cached data");
+          setUserData(storedData);
+          setLoading(false);
+        } else {
+          // Fetch fresh data
+          console.log("Fetching fresh data");
+          const response = await fetcher.get("/users/profile");
+          const dataWithTimestamp = { ...response, fetchedAt: now };
+          setUserData(dataWithTimestamp);
+          await saveUserData(dataWithTimestamp);
+          setLoading(false);
+        }
       } catch (error) {
-        console.error("Failed to fetch user profile:", error);
+        console.error("Error loading user data:", error);
+        setLoading(false);
       }
     };
-    fetchUserData();
+    loadUserData();
   }, []);
-
-  console.log(userData);
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
@@ -48,7 +65,7 @@ const UserProfile = () => {
           <div className="mt-[60px] px-4">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-xl font-semibold">{userData.name}</h1>
+                <h1 className="text-xl font-semibold">{userData?.name}</h1>
                 <div className="flex items-center gap-2 text-gray-400 text-sm mt-1">
                   <span>Wallet ID:</span>
                   <span className="font-mono">{userData._id}</span>

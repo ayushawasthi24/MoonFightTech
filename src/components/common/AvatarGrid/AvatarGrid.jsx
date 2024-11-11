@@ -1,6 +1,6 @@
 import React from "react";
 
-const AvatarGrid = ({ selectedTokens }) => {
+const AvatarGrid = ({ selectedTokens, openModal }) => {
   const avatars = selectedTokens.map((token) => ({
     name: token.symbol,
     credits: token.credits,
@@ -8,6 +8,24 @@ const AvatarGrid = ({ selectedTokens }) => {
     buttonIcon: "/icons/Edit Icon.png",
     crownIcon: "/icons/crown 1.png",
   }));
+
+  const joinContest = async () => {
+    const tokens = selectedTokens.map((token) => token._id);
+    setLoadingJoin(true);
+
+    try {
+      const response = await fetcher.post(`/contests/join/${slugKey}`, {
+        tokens,
+      });
+      console.log("Contest joined successfully:", response);
+      setJoinSuccess(true);
+    } catch (error) {
+      handleError(error.response.data.message);
+      console.error("Error joining contest:", error);
+    } finally {
+      setLoadingJoin(false);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-between min-h-screen bg-black text-white text-center">
@@ -62,7 +80,7 @@ const AvatarGrid = ({ selectedTokens }) => {
       {/* Footer with Next button */}
       <div
         className="my-4 py-4 mx-4 bg-[#6B61FF] rounded-[100px] font-bold text-[14px] leading-[17px] cursor-pointer"
-        onClick={() => alert("Next button clicked")}
+        onClick={openModal}
       >
         Next
       </div>

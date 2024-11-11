@@ -5,13 +5,15 @@ import HowToUse from "../../common/HowToUse/HowToUse";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import fetcher from "../../../services/apiFetcher";
 import { useNavigate } from "react-router-dom";
-import TemporaryDrawer from "../../common/AvatarGrid/TemporaryDrawer";
-import PrizePool from "../../common/PrizePool/PrizePool";
+import { saveUserData } from "../../../utils/indexedDb";
+import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 
 const Home = () => {
   const navigate = useNavigate();
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const fetchContests = async () => {
@@ -24,12 +26,27 @@ const Home = () => {
         setLoading(false);
       }
     };
+    const fetchUserData = async () => {
+      const now = Date.now();
+      try {
+        const response = await fetcher.get("/users/profile");
+        const dataWithTimestamp = { ...response, fetchedAt: now };
+        setUserData(dataWithTimestamp);
+        await saveUserData(dataWithTimestamp); // Save to IndexedDB
+        setBalance(response.balance);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+        setLoading(false);
+      }
+    };
+    fetchUserData();
     fetchContests();
   }, []);
 
   return (
     <>
-      <Header />
+      <Header balance={balance} />
       <HowToUse />
       <div className="p-2 bg-[#1E1E1E] h-screen w-screen">
         {loading ? (
@@ -50,6 +67,7 @@ const Home = () => {
           </>
         )}
       </div>
+      <BottomNavbar />
     </>
   );
 };

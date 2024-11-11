@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { Connection, PublicKey } from "@solana/web3.js";
 import fetcher from "../../../services/apiFetcher";
+import { saveUserData } from "../../../utils/indexedDB";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(result.user));
           localStorage.setItem("tokens", JSON.stringify(result.tokens));
           localStorage.setItem("token", result.tokens.access.token);
+          localStorage.setItem("walletAddress", address);
           navigate("/home");
         } else {
           alert("Login failed");

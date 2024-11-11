@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
-import fetcher from "../../../services/apiFetcher";
-const Header = () => {
-  const [balance, setBalance] = useState(0);
-  useEffect(() => {
-    const fetchBalance = async () => {
-      try {
-        const response = await fetcher.get("/users/balance");
-        setBalance(response.balance);
-      } catch (error) {
-        console.error("Error fetching balance:", error);
-      }
-    };
-    fetchBalance();
-  }, []);
-
+import { getUserData } from "../../../utils/indexedDb";
+const Header = ({ balance }) => {
   return (
     <header className="bg-gradient-to-b from-gray-900 to-gray-800 p-6 flex justify-between items-center w-screen">
       <svg
@@ -31,7 +18,7 @@ const Header = () => {
 
       <div className="flex justify-center items-center bg-[#FFFFFF33] rounded-[70px] px-[8px] w-[52px] h-[24px] gap-[8px]">
         <img
-        src="/images/coin.png"
+          src="/images/coin.png"
           alt="Coin Icon"
           className="w-[16px] h-[16.5px]"
         />

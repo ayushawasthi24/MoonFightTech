@@ -12,8 +12,8 @@ const getToken = () => {
   if (typeof window !== "undefined") {
     const token =
       localStorage.getItem("token") || localStorage.getItem("guestAccessToken");
-    // return token;
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzI5YzdhY2E0NDkwMDRjNDhhZWQ3ZDQiLCJpYXQiOjE3MzA4MDE2NjIsImV4cCI6MTczMjYwMTY2MiwidHlwZSI6ImFjY2VzcyJ9.P1DeU1gKdWJCO5pgxhEdynoH5Gpo8jBmojWJ5K0mx-M";
+    return token;
+    // return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzI5YzdhY2E0NDkwMDRjNDhhZWQ3ZDQiLCJpYXQiOjE3MzA4MDE2NjIsImV4cCI6MTczMjYwMTY2MiwidHlwZSI6ImFjY2VzcyJ9.P1DeU1gKdWJCO5pgxhEdynoH5Gpo8jBmojWJ5K0mx-M";
   }
   return null;
 };

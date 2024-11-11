@@ -14,12 +14,15 @@ import BackHeader from "../../common/BackHeader/BackHeader";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import AvatarGrid from "../../common/AvatarGrid/AvatarGrid";
+import { getUserData } from "../../../utils/indexedDb";
+import { useSnackbar } from "../../../contexts/SnackbarContext";
 
 const RaffleDetails = () => {
-  const navigate = useNavigate();
+  const showSnackbar = useSnackbar();
   const slugKey = useLocation().pathname.split("/").pop();
 
   const [loading, setLoading] = useState(true);
+  const [loadingJoin, setLoadingJoin] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contest, setContest] = useState(null);
   const [selectedTokens, setSelectedTokens] = useState([]);
@@ -40,6 +43,7 @@ const RaffleDetails = () => {
         setEntryFee(res.entryFee);
       } catch (error) {
         console.error("Error fetching contests:", error);
+        showSnackbar("Error fetching contest details!", "error");
       } finally {
         setLoading(false);
       }
@@ -47,8 +51,10 @@ const RaffleDetails = () => {
 
     const fetchAccountBalance = async () => {
       try {
-        const balanceResponse = await fetcher.get("/users/balance");
-        setAccountBalance(balanceResponse.balance);
+        // const balanceResponse = await fetcher.get("/users/balance");
+        let id = JSON.parse(localStorage.getItem("user")).id;
+        const userData = await getUserData(id);
+        setAccountBalance(userData.balance);
       } catch (error) {
         console.error("Error fetching account balance:", error);
       }
@@ -74,7 +80,7 @@ const RaffleDetails = () => {
 
   const joinContest = async () => {
     const tokens = selectedTokens.map((token) => token._id);
-    setLoading(true);
+    setLoadingJoin(true);
 
     try {
       const response = await fetcher.post(`/contests/join/${slugKey}`, {
@@ -83,10 +89,15 @@ const RaffleDetails = () => {
       console.log("Contest joined successfully:", response);
       setJoinSuccess(true);
     } catch (error) {
+      handleError(error.response.data.message);
       console.error("Error joining contest:", error);
     } finally {
-      setLoading(false);
+      setLoadingJoin(false);
     }
+  };
+
+  const handleError = (error) => {
+    showSnackbar(error, "error");
   };
 
   const buttons = [
@@ -102,13 +113,19 @@ const RaffleDetails = () => {
       ),
       bgColor: "bg-[#6B61FF]",
       textColor: "text-white",
-      onClick: toggleDrawer(true),
+      onClick:
+        selectedTokens.length > 0
+          ? toggleDrawer(true)
+          : () => handleError("No tokens selected!"),
     },
     {
       text: selectedTokens.length > 0 ? "Next" : "How It Works",
       bgColor: "bg-white",
       textColor: "text-[#6B61FF] hover:bg-gray-100",
-      onClick: openModal,
+      onClick:
+        selectedTokens.length > 0
+          ? openModal
+          : () => handleError("No tokens selected!"),
     },
   ];
 
@@ -172,7 +189,7 @@ const RaffleDetails = () => {
             onClick={toggleDrawer(false)}
           >
             {/* Render AvatarGrid inside the drawer */}
-            <AvatarGrid selectedTokens={selectedTokens}/>
+            <AvatarGrid selectedTokens={selectedTokens} openModal={openModal} />
           </Box>
         </Drawer>
       </div>
@@ -182,7 +199,7 @@ const RaffleDetails = () => {
         onClose={closeModal}
         title="Confirm your participation"
       >
-        {loading ? (
+        {loadingJoin ? (
           <div className="flex justify-center items-center min-h-[200px]">
             <div className="w-12 h-12 border-4 border-t-[#6B61FF] border-solid border-transparent rounded-full animate-spin"></div>
           </div>

@@ -14,13 +14,15 @@ import BackHeader from "../../common/BackHeader/BackHeader";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import AvatarGrid from "../../common/AvatarGrid/AvatarGrid";
-import { getUserData } from "../../../utils/indexedDb";
+import { saveUserData, getUserData } from "../../../utils/indexedDb";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
+
+const DATA_MAX_AGE = 1000; // 24 hours
 
 const RaffleDetails = () => {
   const showSnackbar = useSnackbar();
   const slugKey = useLocation().pathname.split("/").pop();
-
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadingJoin, setLoadingJoin] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,20 +51,39 @@ const RaffleDetails = () => {
       }
     };
 
+    fetchContestDetails();
+  }, [slugKey]);
+
+  useEffect(() => {
     const fetchAccountBalance = async () => {
       try {
-        // const balanceResponse = await fetcher.get("/users/balance");
+        setLoadingJoin(true);
         let id = JSON.parse(localStorage.getItem("user")).id;
-        const userData = await getUserData(id);
-        setAccountBalance(userData.balance);
+        const storedData = await getUserData(id);
+        const now = Date.now();
+
+        if (storedData && now - storedData.fetchedAt < DATA_MAX_AGE) {
+          console.log("Using cached data");
+          setUserData(storedData);
+          setAccountBalance(storedData.balance);
+          setLoadingJoin(false);
+        } else {
+          // Fetch fresh data
+          console.log("Fetching fresh data");
+          const response = await fetcher.get("/users/profile");
+          const dataWithTimestamp = { ...response, fetchedAt: now };
+          setUserData(dataWithTimestamp);
+          await saveUserData(dataWithTimestamp);
+          setAccountBalance(response.balance);
+          setLoadingJoin(false);
+        }
       } catch (error) {
-        console.error("Error fetching account balance:", error);
+        console.error("Error loading user data:", error);
+        setLoading(false);
       }
     };
-
-    fetchContestDetails();
     fetchAccountBalance();
-  }, [slugKey]);
+  }, []);
 
   const handleTokenSelect = (token) => {
     setSelectedTokens((prevTokens) =>

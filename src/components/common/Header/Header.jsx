@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUserData } from "../../../utils/indexedDb";
+import { getUserData } from "../../../utils/indexedDB";
 const Header = ({ balance }) => {
   return (
     <header className="bg-gradient-to-b from-gray-900 to-gray-800 p-6 flex justify-between items-center w-screen">
@@ -17,11 +17,7 @@ const Header = ({ balance }) => {
       </svg>
 
       <div className="flex justify-center items-center bg-[#FFFFFF33] rounded-[70px] px-[8px] w-[52px] h-[24px] gap-[8px]">
-        <img
-          src="/images/coin.png"
-          alt="Coin Icon"
-          className="w-[16px] h-[16.5px]"
-        />
+        <img src="/images/coin.png" alt="Coin Icon" className="w-[16px] h-[16.5px]" />
         <span className="text-white mt-1 text-[12px]">{balance}</span>
       </div>
     </header>

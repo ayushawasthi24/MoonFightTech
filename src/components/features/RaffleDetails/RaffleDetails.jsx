@@ -14,7 +14,7 @@ import BackHeader from "../../common/BackHeader/BackHeader";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import AvatarGrid from "../../common/AvatarGrid/AvatarGrid";
-import { saveUserData, getUserData } from "../../../utils/indexedDb";
+import { saveUserData, getUserData } from "../../../utils/indexedDB";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
 import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
@@ -87,9 +87,7 @@ const RaffleDetails = () => {
 
   const handleTokenSelect = (token) => {
     setSelectedTokens((prevTokens) =>
-      prevTokens.includes(token)
-        ? prevTokens.filter((t) => t !== token)
-        : [...prevTokens, token]
+      prevTokens.includes(token) ? prevTokens.filter((t) => t !== token) : [...prevTokens, token]
     );
   };
 
@@ -135,18 +133,13 @@ const RaffleDetails = () => {
       bgColor: "bg-[#6B61FF]",
       textColor: "text-white",
       onClick:
-        selectedTokens.length > 0
-          ? toggleDrawer(true)
-          : () => handleError("No tokens selected!"),
+        selectedTokens.length > 0 ? toggleDrawer(true) : () => handleError("No tokens selected!"),
     },
     {
       text: selectedTokens.length > 0 ? "Next" : "How It Works",
       bgColor: "bg-white",
       textColor: "text-[#6B61FF] hover:bg-gray-100",
-      onClick:
-        selectedTokens.length > 0
-          ? openModal
-          : () => handleError("No tokens selected!"),
+      onClick: selectedTokens.length > 0 ? openModal : () => handleError("No tokens selected!"),
     },
   ];
 
@@ -178,10 +171,7 @@ const RaffleDetails = () => {
             {/* Avg Points Column */}
             <div className="col-span-3 flex items-center justify-center">
               <p className="text-center font-[700] text-[12px]">Avg Points</p>
-              <Tooltip
-                title="Average points of the token in the last 24 hours"
-                placement="top"
-              >
+              <Tooltip title="Average points of the token in the last 24 hours" placement="top">
                 <InfoOutlinedIcon className="text-gray-400" fontSize="small" />
               </Tooltip>
             </div>
@@ -204,22 +194,14 @@ const RaffleDetails = () => {
       {/* Drawer for Avatar Grid */}
       <div>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
-          <Box
-            sx={{ width: 390 }}
-            role="presentation"
-            onClick={toggleDrawer(false)}
-          >
+          <Box sx={{ width: 390 }} role="presentation" onClick={toggleDrawer(false)}>
             {/* Render AvatarGrid inside the drawer */}
             <AvatarGrid selectedTokens={selectedTokens} openModal={openModal} />
           </Box>
         </Drawer>
       </div>
 
-      <CustomModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        title="Confirm your participation"
-      >
+      <CustomModal isOpen={isModalOpen} onClose={closeModal} title="Confirm your participation">
         {loadingJoin ? (
           <div className="flex justify-center items-center min-h-[200px]">
             <div className="w-12 h-12 border-4 border-t-[#6B61FF] border-solid border-transparent rounded-full animate-spin"></div>
@@ -241,11 +223,7 @@ const RaffleDetails = () => {
             <div className="bg-[#1E1E1E] rounded-lg p-3 flex justify-between items-center">
               <span className="text-sm">Account Balance</span>
               <span className="text-sm flex items-center">
-                <img
-                  src="/images/coin.png"
-                  alt="icon"
-                  className="w-4 h-4 mr-1"
-                />
+                <img src="/images/coin.png" alt="icon" className="w-4 h-4 mr-1" />
                 {accountBalance}
               </span>
             </div>
@@ -255,12 +233,7 @@ const RaffleDetails = () => {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm">Entry</span>
                 <span className="text-sm flex items-center">
-                  <img
-                    src="/images/coin.png"
-                    alt="icon"
-                    className="w-4 h-4 mr-1"
-                  />{" "}
-                  {entryFee}
+                  <img src="/images/coin.png" alt="icon" className="w-4 h-4 mr-1" /> {entryFee}
                 </span>
               </div>
               <hr className="border-gray-600" />
@@ -270,11 +243,7 @@ const RaffleDetails = () => {
                   <div className="text-xs text-gray-400">including fees</div>
                 </div>
                 <span className="text-sm flex items-center">
-                  <img
-                    src="/images/coin.png"
-                    alt="icon"
-                    className="w-4 h-4 mr-1"
-                  />
+                  <img src="/images/coin.png" alt="icon" className="w-4 h-4 mr-1" />
                   {entryFee}
                 </span>
               </div>
@@ -287,9 +256,7 @@ const RaffleDetails = () => {
                 Join Contest
               </button>
             ) : (
-              <p className="mt-4 text-red-500 text-center">
-                Insufficient balance.
-              </p>
+              <p className="mt-4 text-red-500 text-center">Insufficient balance.</p>
             )}
           </div>
         )}

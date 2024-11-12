@@ -14,7 +14,7 @@ import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
 import fetcher from "../../../services/apiFetcher";
-import { getUserData, saveUserData } from "../../../utils/indexedDb";
+import { getUserData, saveUserData } from "../../../utils/indexedDB";
 import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
 const WalletPage = () => {

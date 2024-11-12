@@ -4,7 +4,7 @@ import RafflesCard from "../../common/RafflesCard/RafflesCard";
 import fetcher from "../../../services/apiFetcher";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
-import { getUserData, saveUserData } from "../../../utils/indexedDb";
+import { getUserData, saveUserData } from "../../../utils/indexedDB";
 import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
 
@@ -81,9 +81,7 @@ const UserProfile = () => {
 
                 <div>
                   <div className="text-sm text-gray-400">USD Balance</div>
-                  <div className="text-lg font-semibold">
-                    {userData.balance}
-                  </div>
+                  <div className="text-lg font-semibold">{userData.balance}</div>
                 </div>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400" />

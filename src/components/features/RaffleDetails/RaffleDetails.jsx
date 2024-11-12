@@ -16,8 +16,8 @@ import Drawer from "@mui/material/Drawer";
 import AvatarGrid from "../../common/AvatarGrid/AvatarGrid";
 import { saveUserData, getUserData } from "../../../utils/indexedDb";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
+import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
-const DATA_MAX_AGE = 1000; // 24 hours
 
 const RaffleDetails = () => {
   const showSnackbar = useSnackbar();

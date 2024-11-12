@@ -15,8 +15,7 @@ import Shimmer from "../../common/Shimmer/Shimmer";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
 import fetcher from "../../../services/apiFetcher";
 import { getUserData, saveUserData } from "../../../utils/indexedDb";
-
-const DATA_MAX_AGE = 1000 * 60 * 60 * 24; // 24 hours
+import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
 const WalletPage = () => {
   const [isDepositOpen, setIsDepositOpen] = useState(false);
@@ -26,6 +25,9 @@ const WalletPage = () => {
   const [userData, setUserData] = useState(null);
   const showSnackbar = useSnackbar();
   const walletAddress = localStorage.getItem("walletAddress");
+  const [depositAddress, setDepositAddress] = useState("");
+  const [isFetchingDepositAddress, setIsFetchingDepositAddress] =
+    useState(false);
 
   const handleCopy = () => {
     if (walletAddress) {
@@ -88,6 +90,24 @@ const WalletPage = () => {
 
   const handleChainChange = (event) => {
     setSelectedChain(event.target.value);
+  };
+
+  const fetchDepositAddress = async (chainId) => {
+    setIsFetchingDepositAddress(true);
+    try {
+      const response = await fetcher.get(
+        "http://35.200.242.137:3030/v1/users/deposit-crypto",
+        { chainId }
+      );
+      if (response.address) {
+        setDepositAddress(response.address);
+      }
+    } catch (error) {
+      console.error("Failed to fetch deposit address:", error);
+      showSnackbar("Failed to fetch deposit address", "error");
+    } finally {
+      setIsFetchingDepositAddress(false);
+    }
   };
 
   const renderTransactionList = () => {
@@ -277,9 +297,25 @@ const WalletPage = () => {
               Note: Please deposit USDC using only the network specified above.
             </div>
 
+            {/* Display Deposit Address */}
+            {depositAddress && !isFetchingDepositAddress && (
+              <div className="mt-4">
+                <div className="text-sm font-mono overflow-hidden overflow-ellipsis">
+                  Deposit Address: {depositAddress}
+                </div>
+              </div>
+            )}
+
+            {/* Loading spinner */}
+            {isFetchingDepositAddress && (
+              <div className="flex justify-center mt-4">
+                <CircularProgress size={24} color="inherit" />
+              </div>
+            )}
+
             <div className="mt-6">
               <button
-                onClick={toggleDepositModal}
+                onClick={fetchDepositAddress.bind(null, selectedChain)}
                 className="bg-[#5A5AFF] text-white py-2 px-4 rounded-lg w-full"
               >
                 Done

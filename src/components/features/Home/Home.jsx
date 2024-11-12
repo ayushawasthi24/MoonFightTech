@@ -5,8 +5,8 @@ import HowToUse from "../../common/HowToUse/HowToUse";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import fetcher from "../../../services/apiFetcher";
 import { useNavigate } from "react-router-dom";
-import { saveUserData } from "../../../utils/indexedDb";
 import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
+import { saveUserData } from "../../../utils/indexedDB";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -48,19 +48,14 @@ const Home = () => {
     <>
       <Header balance={balance} />
       <HowToUse />
-      <div className="p-2 bg-[#1E1E1E] h-screen w-screen">
+      <div className="p-2 bg-[#1E1E1E] h-screen">
         {loading ? (
           <Shimmer />
         ) : (
           <>
-            <div className="text-white text-[14px] ml-[11px] m-2 font-[600]">
-              Upcoming Raffles
-            </div>
+            <div className="text-white text-[14px] ml-[11px] m-2 font-[600]">Upcoming Raffles</div>
             {contests.map((contest) => (
-              <div
-                key={contest.id}
-                onClick={() => navigate(`/game/${contest.slugKey}`)}
-              >
+              <div key={contest.id} onClick={() => navigate(`/game/${contest.slugKey}`)}>
                 <RafflesCard raffleData={contest} />
               </div>
             ))}

@@ -95,10 +95,7 @@ const WalletPage = () => {
   const fetchDepositAddress = async (chainId) => {
     setIsFetchingDepositAddress(true);
     try {
-      const response = await fetcher.get(
-        "http://35.200.242.137:3030/v1/users/deposit-crypto",
-        { chainId }
-      );
+      const response = await fetcher.get("/users/deposit-crypto", { chainId });
       if (response.address) {
         setDepositAddress(response.address);
       }

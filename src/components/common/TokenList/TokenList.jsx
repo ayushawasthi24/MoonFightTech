@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { formatMarketCap } from "../../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const TokenList = ({ tokens, selectedTokens, onTokenSelect }) => {
+  const navigate = useNavigate();
+  const handleClickToken = (token) => {
+    console.log("🚀 ~ TokenList ~ token:", token);
+  };
+
   return (
     <div className="pb-[100px]">
       {tokens.map((token, index) => {
@@ -13,17 +19,12 @@ const TokenList = ({ tokens, selectedTokens, onTokenSelect }) => {
             className={`w-full grid grid-cols-2 px-2 py-2 my-2 ${
               isSelected ? "bg-[#6B61FF]" : "bg-[#353535]"
             }`}
+            onClick={() => handleClickToken(token)}
           >
             <div className="grid grid-cols-2">
               <div className="flex flex-col gap-2 items-center justify-center">
-                <img
-                  src={token.image_url}
-                  alt={token.name}
-                  className="w-[42px] h-[42px]"
-                />
-                <h3 className="font-[600] text-[12px] text-[#D2D2D2]">
-                  {token.symbol}
-                </h3>
+                <img src={token.image_url} alt={token.name} className="w-[42px] h-[42px]" />
+                <h3 className="font-[600] text-[12px] text-[#D2D2D2]">{token.symbol}</h3>
               </div>
               <div className="flex flex-col items-start gap-2 m-1 justify-center text-[10px]">
                 <p className="text-white">{token.price_usd.toFixed(4)}</p>
@@ -46,7 +47,9 @@ const TokenList = ({ tokens, selectedTokens, onTokenSelect }) => {
               <div className="grid grid-rows-2 col-span-2 items-center">
                 <div className="grid grid-cols-2">
                   <div className="text-center">
-                    <p className="font-[400] text-[14px]">{token.avg_points > 0 ? token.avg_points : "NA"}</p>
+                    <p className="font-[400] text-[14px]">
+                      {token.avg_points > 0 ? token.avg_points : "NA"}
+                    </p>
                   </div>
                   <div className="text-center">
                     <p className="font-[400] text-[14px]">{token.credits}</p>

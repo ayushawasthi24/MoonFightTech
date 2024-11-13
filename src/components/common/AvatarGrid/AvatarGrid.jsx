@@ -1,4 +1,5 @@
 import React from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const AvatarGrid = ({ selectedTokens, openModal }) => {
   const avatars = selectedTokens.map((token) => ({
@@ -26,17 +27,17 @@ const AvatarGrid = ({ selectedTokens, openModal }) => {
       setLoadingJoin(false);
     }
   };
+  const handleBack = () => {};
 
   return (
     <div className="flex flex-col justify-between min-h-screen bg-black text-white text-center">
       {/* Header */}
-      <div className="bg-[url('/images/Mask group.png')] py-4 text-[14px] font-medium leading-5 flex justify-center items-center bg-[#1e1e1e]">
-        <img
-          src="/icons/Solana Icon.png"
-          alt="Solana Logo"
-          className="w-6 mr-2"
-        />
-        <span>Team Solana Maxis</span>
+      <div className="bg-[url('/images/Mask group.png')] p-4 text-[14px] flex font-medium leading-5 flex  bg-[#1e1e1e]">
+        <ArrowBackIcon className="text-white" onClick={handleBack} />
+        <div className=" w-full flex justify-center items-center">
+          <img src="/icons/Solana Icon.png" alt="Solana Logo" className="w-6 mr-2" />
+          <span>Preview Team</span>
+        </div>
       </div>
 
       {/* Avatar Grid */}
@@ -54,16 +55,10 @@ const AvatarGrid = ({ selectedTokens, openModal }) => {
             <div className="font-light text-[16px] w-full text-[#D2D2D2] mt-2 truncate">
               {avatar.name}
             </div>
-            <div className="text-[14px] text-white mt-1 mb-2">
-              {avatar.credits} Credits
-            </div>
+            <div className="text-[14px] text-white mt-1 mb-2">{avatar.credits} Credits</div>
             {/* Button */}
             <div className="absolute bottom-[60px] right-[-10px] rounded-full cursor-pointer">
-              <img
-                src={avatar.buttonIcon}
-                alt="button-icon"
-                className="w-8 h-8"
-              />
+              <img src={avatar.buttonIcon} alt="button-icon" className="w-8 h-8" />
             </div>
             {/* Crown Icon */}
             {avatar.crownIcon && (

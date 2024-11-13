@@ -5,8 +5,8 @@ import fetcher from "../../../services/apiFetcher";
 import Shimmer from "../../common/Shimmer/Shimmer";
 import BottomNavbar from "../../common/BottomNavbar/BottomNavbar";
 import { getUserData, saveUserData } from "../../../utils/indexedDB";
+import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
-const DATA_MAX_AGE = 1000; // 24 hours
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);

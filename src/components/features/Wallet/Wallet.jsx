@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Select, MenuItem, FormControl, InputLabel, CircularProgress } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  CircularProgress,
+} from "@mui/material";
 import { Wallet, Download, Upload, X, Copy } from "lucide-react";
 import BackHeader from "../../common/BackHeader/BackHeader";
 import CustomToggle from "../../common/CustomToggle/CustomToggle";
@@ -9,8 +15,7 @@ import Shimmer from "../../common/Shimmer/Shimmer";
 import { useSnackbar } from "../../../contexts/SnackbarContext";
 import fetcher from "../../../services/apiFetcher";
 import { getUserData, saveUserData } from "../../../utils/indexedDB";
-
-const DATA_MAX_AGE = 1000 * 60 * 60 * 24; // 24 hours
+import { DATA_MAX_AGE } from "../../../constants/appConstants";
 
 const WalletPage = () => {
   const [isDepositOpen, setIsDepositOpen] = useState(false);
@@ -20,6 +25,9 @@ const WalletPage = () => {
   const [userData, setUserData] = useState(null);
   const showSnackbar = useSnackbar();
   const walletAddress = localStorage.getItem("walletAddress");
+  const [depositAddress, setDepositAddress] = useState("");
+  const [isFetchingDepositAddress, setIsFetchingDepositAddress] =
+    useState(false);
 
   const handleCopy = () => {
     if (walletAddress) {
@@ -84,6 +92,21 @@ const WalletPage = () => {
     setSelectedChain(event.target.value);
   };
 
+  const fetchDepositAddress = async (chainId) => {
+    setIsFetchingDepositAddress(true);
+    try {
+      const response = await fetcher.get("/users/deposit-crypto", { chainId });
+      if (response.address) {
+        setDepositAddress(response.address);
+      }
+    } catch (error) {
+      console.error("Failed to fetch deposit address:", error);
+      showSnackbar("Failed to fetch deposit address", "error");
+    } finally {
+      setIsFetchingDepositAddress(false);
+    }
+  };
+
   const renderTransactionList = () => {
     const transactions = [
       {
@@ -104,7 +127,10 @@ const WalletPage = () => {
     ];
 
     return transactions.map((transaction, index) => (
-      <div key={index} className="flex items-center space-x-3 bg-[#353535] p-3 rounded-[12px]">
+      <div
+        key={index}
+        className="flex items-center space-x-3 bg-[#353535] p-3 rounded-[12px]"
+      >
         <div className="bg-[#32BA7C33] w-[32px] h-[32px] rounded-[4px] flex items-center justify-center">
           <svg
             width="16"
@@ -147,12 +173,24 @@ const WalletPage = () => {
         <>
           <div className="p-4 space-y-4 bg-[#353535] mx-[16px] rounded-[12px]">
             <div className="flex items-center space-x-2">
-              <img src="/images/wallet.png" className="w-[44px] h-[44px]" alt="Wallet" />
+              <img
+                src="/images/wallet.png"
+                className="w-[44px] h-[44px]"
+                alt="Wallet"
+              />
               <div className="flex flex-col">
-                <span className="font-[400] text-[12px] text-[#D2D2D2]">Usable Balance</span>
+                <span className="font-[400] text-[12px] text-[#D2D2D2]">
+                  Usable Balance
+                </span>
                 <div className="flex gap-2">
-                  <img src="/images/coin.png" alt="Coin" className="w-[20px] h-[20px]" />
-                  <span className="font-[400] text-[16px] text-white">{userData.balance}</span>
+                  <img
+                    src="/images/coin.png"
+                    alt="Coin"
+                    className="w-[20px] h-[20px]"
+                  />
+                  <span className="font-[400] text-[16px] text-white">
+                    {userData.balance}
+                  </span>
                 </div>
               </div>
             </div>
@@ -161,11 +199,19 @@ const WalletPage = () => {
                 className="flex-1 flex items-center justify-center space-x-1 text-[#D2D2D2] font-bold py-2 px-4 rounded"
                 onClick={toggleDepositModal}
               >
-                <img src="/images/deposit.png" alt="Deposit" className="w-[32px] h-[32px]" />
+                <img
+                  src="/images/deposit.png"
+                  alt="Deposit"
+                  className="w-[32px] h-[32px]"
+                />
                 <span className="font-[400] text-[12px]">Deposit Crypto</span>
               </button>
               <button className="flex-1 flex items-center justify-center space-x-1 text-[#D2D2D2] font-bold py-2 px-4 rounded">
-                <img src="/images/transfer.png" alt="Transfer" className="w-[32px] h-[32px]" />
+                <img
+                  src="/images/transfer.png"
+                  alt="Transfer"
+                  className="w-[32px] h-[32px]"
+                />
                 <span className="font-[400] text-[12px]">Transfer Crypto</span>
               </button>
             </div>
@@ -248,9 +294,25 @@ const WalletPage = () => {
               Note: Please deposit USDC using only the network specified above.
             </div>
 
+            {/* Display Deposit Address */}
+            {depositAddress && !isFetchingDepositAddress && (
+              <div className="mt-4">
+                <div className="text-sm font-mono overflow-hidden overflow-ellipsis">
+                  Deposit Address: {depositAddress}
+                </div>
+              </div>
+            )}
+
+            {/* Loading spinner */}
+            {isFetchingDepositAddress && (
+              <div className="flex justify-center mt-4">
+                <CircularProgress size={24} color="inherit" />
+              </div>
+            )}
+
             <div className="mt-6">
               <button
-                onClick={toggleDepositModal}
+                onClick={fetchDepositAddress.bind(null, selectedChain)}
                 className="bg-[#5A5AFF] text-white py-2 px-4 rounded-lg w-full"
               >
                 Done

@@ -195,7 +195,6 @@ const RaffleDetails = () => {
       <div>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
           <Box sx={{ width: 390 }} role="presentation" onClick={toggleDrawer(false)}>
-            {/* Render AvatarGrid inside the drawer */}
             <AvatarGrid selectedTokens={selectedTokens} openModal={openModal} />
           </Box>
         </Drawer>
